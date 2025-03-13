@@ -23,3 +23,22 @@ export const sortByTerm = (prodList:Product[],term:"name"|"creationDate")=>{
         return 0;
       });
 }
+
+export const saveListToLocalstorage = (prodList: Product[])=>{
+  try {
+    const listSerialized:string = JSON.stringify(prodList)
+    localStorage.setItem('productsList', listSerialized);
+  } catch (error) {
+    console.error(`Error at saveListToLocalstorage: ${error}`)
+  }
+}
+
+export const getListFromLocalstorage = (): Product[] | void=>{
+  try {
+    const serializedList = localStorage.getItem('productsList');
+    if(!serializedList) return;
+    return JSON.parse(serializedList)
+  } catch (error) {
+    console.error(`Error at getListFromLocalstorage: ${error}`)
+  }
+}

@@ -5,18 +5,35 @@ import ProductCard from "../../components/productCard";
 import EditView from "../../components/editView";
 import AppButton from "../../components/appButton";
 import SortBox from "../../components/sortBox";
-import { sortByTerm } from "../../utils";
+import {
+  getListFromLocalstorage,
+  saveListToLocalstorage,
+  sortByTerm,
+} from "../../utils";
 import classes from "./hompage.module.css";
 
 function HomePage() {
-  const [products, setProducts] = useState<Product[]>(productList);
+  const [products, setProducts] = useState<Product[]>([]);
   const [productListToShow, setProductListToShow] =
     useState<Product[]>(products);
   const [prodInView, setProdInView] = useState<Product | null>(null);
   const [sortTerm, setSortTerm] = useState<"name" | "creationDate">("name");
   const [searchTerm, setSearchTerm] = useState("");
 
-  //-------//
+  //initial save to L.S//
+  useEffect(() => {
+    const list = getListFromLocalstorage();
+    if (!list && productList?.length > 0) {
+      saveListToLocalstorage(productList);
+    }
+  }, []);
+
+  useEffect(() => {
+    const list = getListFromLocalstorage();
+    if (list) {
+      setProducts(list);
+    }
+  }, []);
 
   const filterProducts = useCallback(
     (term: string) => {
@@ -44,17 +61,20 @@ function HomePage() {
       prod.id == prodData.id ? prodData : prod
     );
     setProducts(newProdList);
+    saveListToLocalstorage(newProdList)
     setProdInView(null);
   };
 
   const handleAddProduct = (prodData: Product) => {
     const newProduct: Product = { ...prodData, id: products.length };
     setProducts([...products, newProduct]);
+    saveListToLocalstorage([...products, newProduct])
     setProdInView(null);
   };
 
   const handleProdDelete = (id: number) => {
     const newList = products.filter((prod) => prod.id !== id);
+    saveListToLocalstorage(newList)
     setProducts(newList);
   };
 
