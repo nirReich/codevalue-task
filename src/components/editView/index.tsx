@@ -2,6 +2,7 @@ import React, { FC, FormEvent, useEffect, useState } from "react";
 import { Product } from "../../types";
 import AppButton from "../appButton";
 import prodImg from "../../assets/react.svg";
+import { isProductsEqual } from "../../utils";
 
 type EditViewProps = {
   data: Product | null;
@@ -13,26 +14,37 @@ const EditView: FC<EditViewProps> = ({ data, submitHandler }) => {
   const [description, setDescription] = useState<string>(
     data?.description || ""
   );
-  const [price, setPrice] = useState<number>(data?.price || 0);
-  useEffect(()=>{
-    setName(data?.name||'');
-    setDescription(data?.description||'');
-    setPrice(data?.price||0)
-  }, [data])
+  const [price, setPrice] = useState<number | "">(data?.price || "");
+  useEffect(() => {
+    setName(data?.name || "");
+    setDescription(data?.description || "");
+    setPrice(data?.price || "");
+  }, [data]);
+
+  const newProd = {
+    ...data,
+    name,
+    description,
+    price,
+  } as Product;
+
+  const validateFormData = (): boolean => {
+    let infoIsValid = true;
+    if (name.length === 0) infoIsValid = false;
+    if (Number(price) <= 0) infoIsValid = false;
+    return infoIsValid;
+  };
 
   const onSubmitHandle = (e: FormEvent) => {
     e.preventDefault();
-    submitHandler({
-      ...data,
-      name,
-      description,
-      price,
-    } as Product);
+    if (!isProductsEqual(newProd, data as Product) && !validateFormData())
+      return;
+    submitHandler({ ...newProd, creationDate: new Date() });
   };
 
   return (
     <div>
-        <img src={prodImg} alt="product image" />
+      <img src={prodImg} alt="product image" />
       <form onSubmit={onSubmitHandle}>
         <div>
           <label htmlFor="name">Name</label>
@@ -41,6 +53,7 @@ const EditView: FC<EditViewProps> = ({ data, submitHandler }) => {
             id="name"
             onChange={(e) => setName(e.target.value)}
             value={name}
+            placeholder=" Enter Name"
           />
         </div>
         <div>
@@ -51,6 +64,7 @@ const EditView: FC<EditViewProps> = ({ data, submitHandler }) => {
             cols={30}
             onChange={(e) => setDescription(e.target.value)}
             value={description}
+            placeholder="Add Description"
           />
         </div>
         <div>
@@ -62,7 +76,9 @@ const EditView: FC<EditViewProps> = ({ data, submitHandler }) => {
             value={price}
           />
         </div>
-        <AppButton type="submit">Save</AppButton>
+        <AppButton type="submit" disabled={!validateFormData()}>
+          {data ? "Edit" : "Save"}
+        </AppButton>
       </form>
     </div>
   );
