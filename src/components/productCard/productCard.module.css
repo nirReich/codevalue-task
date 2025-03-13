@@ -1,0 +1,7 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    width: 30vw;
+    border: 1px solid green ;
+    justify-content: space-between;
+}
