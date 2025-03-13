@@ -66,7 +66,7 @@ function HomePage() {
   };
 
   const handleAddProduct = (prodData: Product) => {
-    const newProduct: Product = { ...prodData, id: products.length };
+    const newProduct: Product = { ...prodData, id: Date.now() };
     setProducts([...products, newProduct]);
     saveListToLocalstorage([...products, newProduct])
     setProdInView(null);
