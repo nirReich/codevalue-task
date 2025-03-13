@@ -15,13 +15,13 @@ export const productList: Product[] = [
         name:'product 2',
         description: 'product 2 description',
         price:200,
-        creationDate: getDateWithHours(1)
+        creationDate: getDateWithHours(-1)
     },
     {
         id:2,
         name:'product 3',
         description: 'product 3 description',
         price:300,
-        creationDate: getDateWithHours(2)
+        creationDate: getDateWithHours(-2)
     },
 ]
