@@ -1,7 +1,20 @@
 .container{
     display: flex;
     flex-direction: row;
-    width: 30vw;
-    border: 1px solid green ;
+    width: 90%;
+    margin-block: 1vh;
+    border: 2px solid black ;
+    border-radius: 5px;
     justify-content: space-between;
+    align-items: center;
+}
+
+.cardButton{
+    background-color: #FBA834;
+    height: 30px;
+    font-size: small;
+    padding-block: 5px;
+    margin-top: 5%;
+    margin-inline:2% ;
+    color: black;
 }

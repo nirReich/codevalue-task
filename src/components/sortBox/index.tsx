@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import classes from './sortBox.module.css'
 
 type SortBoxProps = {
   sortTermSetter: (term: "name"|"creationDate") => void;
@@ -7,7 +8,7 @@ type SortBoxProps = {
 
 const SortBox: FC<SortBoxProps> = ({ sortTermSetter, searchTermSetter }) => {
   return (
-    <div>
+    <div className={classes.container}>
       <input
         type="text"
         onChange={(e) => searchTermSetter(e.target.value)}

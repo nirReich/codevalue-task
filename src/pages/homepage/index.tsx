@@ -6,6 +6,7 @@ import EditView from "../../components/editView";
 import AppButton from "../../components/appButton";
 import SortBox from "../../components/sortBox";
 import { sortByTerm } from "../../utils";
+import classes from "./hompage.module.css";
 
 function HomePage() {
   const [products, setProducts] = useState<Product[]>(productList);
@@ -58,17 +59,26 @@ function HomePage() {
   };
 
   return (
-    <div>
-      <AppButton onClick={() => setProdInView(null)}>Add +</AppButton>
-      <SortBox sortTermSetter={setSortTerm} searchTermSetter={setSearchTerm} />
-      {productListToShow.map((product) => (
-        <div key={product.id} onClick={() => setProdInView(product)}>
-          <ProductCard
-            productData={product}
-            onClickDeleteHandler={handleProdDelete}
+    <div className={classes.container}>
+      <div className={classes.listSection}>
+        <div className={classes.topInputsContainer}>
+          <AppButton onClick={() => setProdInView(null)}>Add +</AppButton>
+          <SortBox
+            sortTermSetter={setSortTerm}
+            searchTermSetter={setSearchTerm}
           />
         </div>
-      ))}
+        <div className={classes.itemsContainer}>
+          {productListToShow.map((product) => (
+            <div key={product.id} onClick={() => setProdInView(product)}>
+              <ProductCard
+                productData={product}
+                onClickDeleteHandler={handleProdDelete}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
       <EditView
         data={prodInView}
         submitHandler={prodInView ? handleEditProduct : handleAddProduct}
