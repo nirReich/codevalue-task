@@ -1,54 +1,65 @@
-# React + TypeScript + Vite
+# codevalue-task - Product Management App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains the code for a product management application, developed as a home assignment for a job interview with CodeValue.
 
-Currently, two official plugins are available:
+## Technologies Used
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* **React:** For building the user interface.
+* **TypeScript:** For static typing and improved code maintainability.
+* **Vite:** For a fast and efficient development environment.
+* **Yarn:** For package management.
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1.  **Clone the repository:**
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+    ```bash
+    git clone [repository URL]
+    cd codevalue-task
+    ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2.  **Install dependencies:**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+    ```bash
+    yarn install
+    ```
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+3.  **Start the development server:**
+
+    ```bash
+    yarn dev
+    ```
+
+    This will start the application at `http://localhost:5173/` (or another port as specified by Vite).
+
+## Project Structure
+codevalue-task/
+├── public/
+│   └── ... (static assets)
+├── src/
+│   ├── components/
+│   │   └── ... (React components)
+├   |── pages/
+│   │   └── ... (project pages components)
+│   ├── assets/
+│   │   └── ... (images, etc.)
+│   ├── types/
+│   │   └── ... (TypeScript types)
+├   |── utils/
+│   │   └── ... (project utils)
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── ... (other source files)
+├── .gitignore
+├── index.html
+├── package.json
+├── README.md
+├── tsconfig.json
+├── vite.config.ts
+└── yarn.lock
+
+## Author
+
+* Nir Reich
+
+Thank you for reviewing my submission!
